@@ -1,5 +1,6 @@
 import React from "react"; //importing the React library
 import ReactDOM from "react-dom/client"; //importing the ReactDOM library
+import "./index.css";
 
 const pizzaData = [
   {
@@ -48,31 +49,61 @@ const pizzaData = [
 
 function App() {
   return (
-    <div>
+    <div className="container">
       <Header />
-      <Pizza />
-      <Pizza />
-      <Pizza />
+      <Menu />
       <Footer />
     </div>
   );
 }
 
 function Header() {
-  return <h1>Pizza Co.</h1>;
+  // const style = { color: "red", fontSize: "48px", textTransform: "uppercase" };
+  const style = {};
+  return (
+    <header className="header">
+      <h1 style={style}>Pizza Co.</h1>
+    </header>
+  );
 }
 
-function Menu() {}
+function Menu() {
+  const hour = new Date().getHours();
+  const openHour = 12;
+  const closeHour = 16;
+  const isOpen = hour >= openHour && hour <= closeHour;
+  console.log(isOpen);
+
+  // if (hour >= openHour && hour <= closeHour) alert("We're currently open!");
+  // else alert("Sorry, we are closed");
+
+  return (
+    <main className="menu">
+      <h2>Our Menu</h2>
+      <Pizza />
+      <Pizza />
+      <Pizza />
+      <Pizza />
+    </main>
+  );
+}
 
 function Footer() {
-  return React.createElement("footer", null, "We're Currently Open");
+  return (
+    <footer className="footer">
+      {new Date().toLocaleTimeString()}. We're currently Open{" "}
+    </footer>
+  );
+
+  // old way of doing it
+  //return React.createElement("footer", null, "We're Currently Open");
 }
 
 function Pizza() {
   return (
     <div>
       <img src="pizzas/spinaci.jpg" alt="spinach cheese pizza"></img>
-      <h2>Pizza Spinaci</h2>
+      <h3>Pizza Spinaci</h3>
       <p>Tomato, mozarella, spinach, and ricotta cheese</p>
     </div>
   );
